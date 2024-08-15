@@ -1,5 +1,6 @@
 import pyaudio
 import socket
+import struct
 
 # Audio parameters
 FORMAT = pyaudio.paInt16
@@ -29,13 +30,23 @@ print("Receiving audio...")
 
 try:
     while True:
-        data, addr = sock.recvfrom(CHUNK * 2)  # Receive audio data
-        stream.write(data)  # Play the received audio data
+        # Receive audio data from sender
+        data, addr = sock.recvfrom(CHUNK * 2)  # Receiving audio in chunks (2 bytes per sample for paInt16)
+        
+        # Optional: Validate data length
+        if len(data) != CHUNK * 2:
+            print("Received incomplete chunk")
+            continue
+        
+        # Play the received audio data
+        stream.write(data)
 except KeyboardInterrupt:
     pass
-
-# Close the stream and socket
-stream.stop_stream()
-stream.close()
-audio.terminate()
-sock.close()
+except Exception as e:
+    print(f"Error: {e}")
+finally:
+    # Close the stream and socket
+    stream.stop_stream()
+    stream.close()
+    audio.terminate()
+    sock.close()

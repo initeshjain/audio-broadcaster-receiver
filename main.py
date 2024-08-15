@@ -8,7 +8,9 @@ RATE = 44100
 CHUNK = 1024
 
 # Network parameters
-HOST = '192.168.1.33'  # Broadcast to all IPs
+# HOST = '192.168.241.75'  # Broadcast to all IPs
+# HOST = '0.0.0.0'  # Broadcast to all IPs
+HOST = '192.168.241.255'  # Broadcast to all IPs
 PORT = 5000
 
 # Initialize PyAudio
