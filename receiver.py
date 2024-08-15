@@ -5,8 +5,8 @@ import struct
 # Audio parameters
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
-RATE = 44100
-CHUNK = 1024
+RATE = 22050  # Lower sample rate for testing
+CHUNK = 2048  # Increased buffer size
 
 # Network parameters
 HOST = '0.0.0.0'  # Listen on all available interfaces
